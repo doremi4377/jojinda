@@ -46,7 +46,9 @@ function PlayList() {
             <div key={id}>
               <div>
                 {title} / {link}
-                <button type="button" onClick={() => onRemove(id)}></button>
+                <button type="button" onClick={() => onRemove(id)}>
+                  삭제
+                </button>
               </div>
             </div>
           </div>
@@ -61,7 +63,7 @@ function PlayList() {
           <label>유투브 링크 입력</label>
           <input type="text" name="link" value={link} onChange={onChange} />
         </div>
-        <button type="button" onClick={onClick}>
+        <button type="button" onClick={onClick} disabled={title.length <= 0 && title.length <= 0}>
           추가
         </button>
       </div>
