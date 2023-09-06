@@ -31,8 +31,8 @@ function MusicStore() {
   };
 
   const handleOnRemove = (title: string) => {
-    const nextNames = playList.filter((item) => item.title !== title);
-    setPlayList(nextNames);
+    const nextForm = playList.filter((item) => item.title !== title);
+    setPlayList(nextForm);
   };
 
   return (
