@@ -1,0 +1,47 @@
+.music-store {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  .play-list-control {
+    width: 300px;
+  }
+
+  .play-list {
+    margin: 50px 0 0;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+
+      padding: 0 0 26px;
+    }
+
+    .play-list-info {
+      strong {
+        color: #1f2328;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 20px;
+      }
+      p {
+        padding: 6px 0 0;
+        color: #969896;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        word-break: break-all;
+
+        a {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .button-remove {
+      flex-shrink: 0;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+.button {
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:active {
+    transform: scale(0.9);
+    transition: transform 0.2s ease-in-out;
+  }
+  &.full {
+    width: 100%;
+
+    padding: 0 20px;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    border-radius: 6px;
+  }
+  &.small {
+    width: 30px;
+    height: 30px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    border-radius: 100%;
+  }
+  &.primary {
+    background-color: #116329;
+  }
+  &.grey {
+    background-color: #cccccc;
+  }
+  &.disabled {
+    opacity: 0.6;
+
+    button {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  button {
+    width: 100%;
+    height: 100%;
+
+    color: #fff;
+  }
+}

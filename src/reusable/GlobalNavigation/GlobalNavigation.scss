@@ -1,0 +1,20 @@
+.global-navigation {
+  height: 60px;
+
+  padding: 0 20px;
+
+  border-bottom: 1px solid #d0d7de;
+  background-color: #f6f8fa;
+
+  h1 {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    color: #1f2328;
+    font-size: 16px;
+    line-height: 20px;
+  }
+}

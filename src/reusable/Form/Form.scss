@@ -1,0 +1,17 @@
+.form {
+  .form-item {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0 0 32px;
+    label {
+      display: flex;
+      padding: 0 0 10px;
+
+      color: #1f2328;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 18px;
+    }
+  }
+}
