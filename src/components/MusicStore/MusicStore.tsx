@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import { nanoid } from "nanoid";
+
 import { Button, Form, TextField } from "../../reusable";
 import PlayList from "./PlayList";
 
 import "./MusicStore.scss";
 
 function MusicStore() {
-  const [playList, setPlayList] = useState<{ title: string; link: string }[]>([]);
+  // 이걸 상태에 넣으면 끝인줄 알았는데....
+  const test = JSON.parse(localStorage.getItem("playListData") || "{}");
+
+  const [playList, setPlayList] = useState<{ id: string; title: string; thumbnail: string; link: string }[]>([]);
   const [form, setForm] = useState({
     title: "",
     link: "",
@@ -14,25 +19,30 @@ function MusicStore() {
   const { title, link } = form;
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const nextForm = {
+    const nextPlayList = {
       ...form,
       [e.target.name]: e.target.value,
     };
-    setForm(nextForm);
+    setForm(nextPlayList);
   };
 
   const handleOnClick = () => {
-    const nextForm = playList.concat({ ...form });
-    setPlayList(nextForm);
+    const videoIdFromURI = link.split("?v=").length > 1 ? link.split("?v=")[1].split("&")[0] : "";
+
+    const nextPlayList = playList.concat({ id: nanoid(10), thumbnail: videoIdFromURI, ...form });
+    setPlayList(nextPlayList);
     setForm({
       title: "",
       link: "",
     });
+
+    // 새로고침 후에 데이터는 콘솔에 있지만 , 추가 버튼 누르면 사라짐
+    localStorage.setItem("playListData", JSON.stringify(nextPlayList));
   };
 
-  const handleOnRemove = (title: string) => {
-    const nextForm = playList.filter((item) => item.title !== title);
-    setPlayList(nextForm);
+  const handleOnRemove = (id: string) => {
+    const nextPlayList = playList.filter((item) => item.id !== id);
+    setPlayList(nextPlayList);
   };
 
   return (
@@ -55,8 +65,8 @@ function MusicStore() {
         </Form>
 
         <PlayList>
-          {playList.map(({ title, link }, index) => (
-            <PlayList.Item key={`playList-${index}`} title={title} link={link} onClick={() => handleOnRemove(title)} />
+          {playList.map(({ id, title, thumbnail, link }) => (
+            <PlayList.Item key={id} title={title} thumbnail={thumbnail} link={link} onClick={() => handleOnRemove(id)} />
           ))}
         </PlayList>
       </section>

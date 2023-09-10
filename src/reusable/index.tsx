@@ -1,7 +1,7 @@
 import Button from "./Button/Button";
-import Container from "./Container/Container";
+import Layout from "./Layout/Layout";
 import GlobalNavigation from "./GlobalNavigation/GlobalNavigation";
 import Form from "./Form/Form";
 import TextField from "./TextField/TextField";
 
-export { Button, Container, GlobalNavigation, Form, TextField };
+export { Button, Layout, GlobalNavigation, Form, TextField };

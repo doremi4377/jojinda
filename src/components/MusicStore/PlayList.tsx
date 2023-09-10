@@ -1,10 +1,12 @@
 import React from "react";
-import { Button } from "../../reusable";
 
 import "./MusicStore.scss";
 
+const test = "https://img.youtube.com/vi/D71FoR-3WG0/hqdefault.jpg";
+
 interface PlayItemProps {
   link?: string;
+  thumbnail?: string;
   title?: string;
   onClick: () => void;
 }
@@ -13,11 +15,12 @@ interface PlayListProps {
   children: React.ReactNode;
 }
 
-function PlayItem({ link, title, onClick }: PlayItemProps) {
+function PlayItem({ link, thumbnail, title, onClick }: PlayItemProps) {
   return (
     <li>
-      {/* TODO: 추후에 썸네일 추가 */}
-      {/* <div className="play-list-thumbnail">썸네일</div> */}
+      <div className="play-list-thumbnail">
+        <img src={`https://img.youtube.com/vi/${thumbnail}/maxresdefault.jpg`} alt="" />
+      </div>
       <div className="play-list-info">
         <strong>{title}</strong>
         <p>
@@ -26,9 +29,9 @@ function PlayItem({ link, title, onClick }: PlayItemProps) {
           </a>
         </p>
       </div>
-      <Button className="button-remove" size="small" theme="grey" onClick={onClick}>
-        X
-      </Button>
+      <button type="button" className="button-remove" onClick={onClick}>
+        삭제
+      </button>
     </li>
   );
 }

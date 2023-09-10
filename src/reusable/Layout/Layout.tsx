@@ -1,19 +1,20 @@
 import React from "react";
 
-import "./Container.scss";
 import SideNavigation from "../SideNavigation/SideNavigation";
 
-interface ContainerProps {
+import "./Layout.scss";
+
+interface LayoutProps {
   children?: React.ReactNode;
 }
 
-function Container({ children }: ContainerProps) {
+function Layout({ children }: LayoutProps) {
   return (
-    <div className="container">
+    <div className="layout">
       <SideNavigation />
       <div className="content">{children}</div>
     </div>
   );
 }
 
-export default Container;
+export default Layout;

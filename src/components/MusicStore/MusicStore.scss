@@ -6,21 +6,42 @@
   gap: 20px;
 
   .play-list-control {
-    width: 300px;
+    width: 500px;
   }
 
   .play-list {
     margin: 50px 0 0;
 
     li {
-      display: flex;
-      justify-content: space-between;
+      position: relative;
 
-      padding: 0 0 26px;
+      display: flex;
+      gap: 10px;
+
+      padding: 0 0 16px;
+    }
+
+    .play-list-thumbnail {
+      width: 168px;
+      height: 94px;
+
+      flex-shrink: 0;
+
+      img {
+        width: 100%;
+        height: 100%;
+
+        border-radius: 10px;
+
+        object-fit: cover;
+      }
     }
 
     .play-list-info {
+      padding: 6px 0 0;
       strong {
+        padding: 0 34px 0 0;
+
         color: #1f2328;
         font-size: 18px;
         font-weight: 700;
@@ -41,7 +62,17 @@
     }
 
     .button-remove {
-      flex-shrink: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+
+      color: #969896;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 18px;
+      text-decoration: underline;
+
+      cursor: pointer;
     }
   }
 }
