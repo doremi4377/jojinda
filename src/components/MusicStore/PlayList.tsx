@@ -2,8 +2,6 @@ import React from "react";
 
 import "./MusicStore.scss";
 
-const test = "https://img.youtube.com/vi/D71FoR-3WG0/hqdefault.jpg";
-
 interface PlayItemProps {
   link?: string;
   thumbnail?: string;

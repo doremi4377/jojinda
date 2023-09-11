@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 
 import { Button, Form, TextField } from "../../reusable";
@@ -7,10 +7,9 @@ import PlayList from "./PlayList";
 import "./MusicStore.scss";
 
 function MusicStore() {
-  // 이걸 상태에 넣으면 끝인줄 알았는데....
-  const test = JSON.parse(localStorage.getItem("playListData") || "{}");
+  const savedPlayList = JSON.parse(localStorage.getItem("playListData") || "[]");
 
-  const [playList, setPlayList] = useState<{ id: string; title: string; thumbnail: string; link: string }[]>([]);
+  const [playList, setPlayList] = useState<{ id: string; title: string; thumbnail: string; link: string }[]>(savedPlayList);
   const [form, setForm] = useState({
     title: "",
     link: "",
@@ -35,15 +34,17 @@ function MusicStore() {
       title: "",
       link: "",
     });
-
-    // 새로고침 후에 데이터는 콘솔에 있지만 , 추가 버튼 누르면 사라짐
-    localStorage.setItem("playListData", JSON.stringify(nextPlayList));
   };
 
   const handleOnRemove = (id: string) => {
     const nextPlayList = playList.filter((item) => item.id !== id);
     setPlayList(nextPlayList);
   };
+
+  useEffect(() => {
+    // playList가 변경되면, localStorage에 다시 저장한다.
+    localStorage.setItem("playListData", JSON.stringify(playList));
+  }, [playList]);
 
   return (
     <main className="music-store">
