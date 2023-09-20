@@ -8,7 +8,7 @@ interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes
   className?: string;
   disabled?: boolean;
   size?: "full" | "large" | "small";
-  theme?: "primary" | "grey";
+  theme?: "primary" | "grey" | "outline";
   type?: "button" | "submit" | "reset";
 }
 

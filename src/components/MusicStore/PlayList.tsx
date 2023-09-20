@@ -1,21 +1,24 @@
 import React from "react";
+import iconDelete from "../../assets/images/icon-remove.png";
 
 import "./MusicStore.scss";
 
 interface PlayItemProps {
+  className?: string;
   link?: string;
   thumbnail?: string;
   title?: string;
-  onClick: () => void;
+  onClickItem?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClickRemove: () => void;
 }
 
 interface PlayListProps {
   children: React.ReactNode;
 }
 
-function PlayItem({ link, thumbnail, title, onClick }: PlayItemProps) {
+function PlayItem({ className, link, thumbnail, title, onClickItem, onClickRemove }: PlayItemProps) {
   return (
-    <li>
+    <li className={className}>
       <div className="play-list-thumbnail">
         <img src={`https://img.youtube.com/vi/${thumbnail}/maxresdefault.jpg`} alt="" />
       </div>
@@ -27,8 +30,9 @@ function PlayItem({ link, thumbnail, title, onClick }: PlayItemProps) {
           </a>
         </p>
       </div>
-      <button type="button" className="button-remove" onClick={onClick}>
-        삭제
+      <button type="button" className="button-item" onClick={onClickItem} aria-label="해당 play 재생으로 이동" />
+      <button type="button" className="button-remove" onClick={onClickRemove}>
+        <img src={iconDelete} alt="삭제" />
       </button>
     </li>
   );

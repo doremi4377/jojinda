@@ -5,6 +5,8 @@ import { Button, Form, TextField } from "../../reusable";
 import PlayList from "./PlayList";
 
 import "./MusicStore.scss";
+import PlayView from "./PlayView";
+import classNames from "classnames";
 
 function MusicStore() {
   const savedPlayList = JSON.parse(localStorage.getItem("playListData") || "[]");
@@ -15,6 +17,7 @@ function MusicStore() {
     link: "",
   });
   const [isShow, setIsShow] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const { title, link } = form;
 
@@ -36,16 +39,15 @@ function MusicStore() {
         return;
       }
 
-      const videoIdFromURI = targetUrl.searchParams.get("v");
-      console.log(targetUrl.searchParams.get("v"));
+      const videoIdFromParams = targetUrl.searchParams.get("v");
 
       //2. 'v=' key가 있는가?
-      if (!videoIdFromURI) {
+      if (!videoIdFromParams) {
         alert("?v= 링크형태를 입력해주어라!");
         return;
       }
 
-      const nextPlayList = playList.concat({ id: nanoid(10), thumbnail: videoIdFromURI, ...form });
+      const nextPlayList = playList.concat({ id: nanoid(10), thumbnail: videoIdFromParams, ...form });
       setPlayList(nextPlayList);
       setForm({
         title: "",
@@ -66,15 +68,22 @@ function MusicStore() {
     localStorage.setItem("playListData", JSON.stringify(playList));
   }, [playList]);
 
+  //PlayView 에 넣을 현재 선택한 리스트 링크/타이틀을 가져온다.
+  const activeTitle = playList[activeIndex].title;
+
+  const activeLink = playList[activeIndex].link;
+  const activeVideoURL = new URL(activeLink);
+  const activeVideoIdFromParams = activeVideoURL.searchParams.get("v");
+
   return (
     <main className="music-store">
       <section className="play-view">
-        <h2>TODO: 플레이 되는 영역</h2>
+        <PlayView link={activeVideoIdFromParams} title={activeTitle} />
       </section>
 
       <section className="play-list-control">
-        <Button size="small" theme="grey" onClick={() => setIsShow(true)}>
-          +추가
+        <Button size="large" theme="outline" onClick={() => setIsShow(true)}>
+          🎶 내가 즐겨 듣는 음악 추가 +
         </Button>
         {isShow && (
           <Form className="play-list-resister">
@@ -87,15 +96,26 @@ function MusicStore() {
             <Button disabled={!title.length && !link.length} onClick={handleOnClickSave}>
               저장
             </Button>
-            <button type="button" className="modal-close" onClick={() => setIsShow(false)}>
-              x
-            </button>
+            <Button size="small" theme="grey" className="button-modal-close" onClick={() => setIsShow(false)}>
+              X
+            </Button>
           </Form>
         )}
 
         <PlayList>
-          {playList.map(({ id, title, thumbnail, link }) => (
-            <PlayList.Item key={id} title={title} thumbnail={thumbnail} link={link} onClick={() => handleOnRemove(id)} />
+          {playList.map(({ id, title, thumbnail, link }, index) => (
+            <PlayList.Item
+              className={classNames({ active: index === activeIndex })}
+              key={id}
+              title={title}
+              thumbnail={thumbnail}
+              link={link}
+              onClickRemove={() => handleOnRemove(id)}
+              onClickItem={(e: React.MouseEvent<HTMLButtonElement>) => {
+                setActiveIndex(index);
+                e.stopPropagation();
+              }}
+            />
           ))}
         </PlayList>
       </section>
