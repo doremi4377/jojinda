@@ -69,9 +69,9 @@ function MusicStore() {
   }, [playList]);
 
   //PlayView 에 넣을 현재 선택한 리스트 링크/타이틀을 가져온다.
-  const activeTitle = playList[activeIndex].title;
+  const activeTitle = playList[activeIndex]?.title;
 
-  const activeLink = playList[activeIndex].link;
+  const activeLink = playList[activeIndex]?.link;
   const activeVideoURL = new URL(activeLink);
   const activeVideoIdFromParams = activeVideoURL.searchParams.get("v");
 
