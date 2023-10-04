@@ -22,11 +22,11 @@ function MusicStore() {
   const { title, link } = form;
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const nextPlayList = {
+    const newPlayList = {
       ...form,
       [e.target.name]: e.target.value,
     };
-    setForm(nextPlayList);
+    setForm(newPlayList);
   };
 
   const handleOnClickSave = () => {
@@ -47,8 +47,8 @@ function MusicStore() {
         return;
       }
 
-      const nextPlayList = playList.concat({ id: nanoid(10), thumbnail: videoIdFromParams, ...form });
-      setPlayList(nextPlayList);
+      const newPlayList = playList.concat({ id: nanoid(10), thumbnail: videoIdFromParams, ...form });
+      setPlayList(newPlayList);
       setForm({
         title: "",
         link: "",
@@ -59,8 +59,8 @@ function MusicStore() {
   };
 
   const handleOnRemove = (id: string) => {
-    const nextPlayList = playList.filter((item) => item.id !== id);
-    setPlayList(nextPlayList);
+    const newPlayList = playList.filter((item) => item.id !== id);
+    setPlayList(newPlayList);
   };
 
   useEffect(() => {
@@ -72,8 +72,8 @@ function MusicStore() {
   const activeTitle = playList[activeIndex]?.title;
 
   const activeLink = playList[activeIndex]?.link;
-  const activeVideoURL = new URL(activeLink);
-  const activeVideoIdFromParams = activeVideoURL.searchParams.get("v");
+
+  const activeVideoIdFromParams = activeLink ? new URL(activeLink).searchParams.get("v") : "";
 
   return (
     <main className="music-store">

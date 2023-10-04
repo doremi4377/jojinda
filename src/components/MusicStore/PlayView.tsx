@@ -1,5 +1,7 @@
 import React from "react";
 
+import Comment from "./Comment";
+
 import "./MusicStore.scss";
 
 interface PlayViewProps {
@@ -18,6 +20,7 @@ function PlayView({ link, title }: PlayViewProps) {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       ></iframe>
       <h2 className="play-view-title">{title}</h2>
+      <Comment />
     </>
   );
 }
