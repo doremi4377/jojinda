@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
+import classNames from "classnames";
 
 import { Button, Form, TextField } from "../../reusable";
 import PlayList from "./PlayList";
+import PlayView from "./PlayView";
+import Comment from "./Comment";
 
 import "./MusicStore.scss";
-import PlayView from "./PlayView";
-import classNames from "classnames";
 
 function MusicStore() {
   const savedPlayList = JSON.parse(localStorage.getItem("playListData") || "[]");
@@ -79,6 +80,7 @@ function MusicStore() {
     <main className="music-store">
       <section className="play-view">
         <PlayView link={activeVideoIdFromParams} title={activeTitle} />
+        <Comment />
       </section>
 
       <section className="play-list-control">

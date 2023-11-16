@@ -155,8 +155,14 @@
       }
     }
     .comment-list {
+      margin: 0 0 50px;
       li {
         position: relative;
+
+        margin: 0 0 20px;
+        padding: 0 0 20px;
+
+        border-bottom: 1px solid #d0d7de;
       }
       .comment-list-button {
         position: absolute;
